@@ -11,6 +11,11 @@ spring:
     url: jdbc:mysql://172.17.0.1:33060/fsd_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
     username: fsd_account_admin
     password: zaq12wsx
+  jpa:
+    hibernate:
+      naming: 
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  
 server:
   servlet:
     context-path: /account

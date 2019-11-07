@@ -3,10 +3,12 @@ package com.fsd.sba.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.fsd.sba.entity.User;
 
+@Mapper
 public interface UserMapper {
     @Select("SELECT * FROM USER WHERE EMAIL = #{email}")
 	User findByName(String email);

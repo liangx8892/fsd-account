@@ -1,58 +1,31 @@
 package com.fsd.sba.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-
-@Entity
-@Table(name = "USER")
 public class User {
 	
 	public User() {
 		
 	}
-	
-	public User(String password,
-				String email, String firstName, String lastName) {
-		this.password = password;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 
-    @Id
-    @GeneratedValue
-	@Column(name = "ID")
+
     private Long id;
 
-	@Column(name = "EMAIL")
 	private String email;
 
-    @Column(name = "PASSWORD")
     private String password;
     
-    @Column(name = "FIRST_NAME")
     private String firstName;
     
-    @Column(name = "LAST_NAME")
     private String lastName;
     
-    @Column(name = "MOBILE")
     private String mobile;
     
-    @Column(name = "ROLE")
     private String role;
     
-    @Column(name = "ACTIVE")
     private Boolean active;
 
-	@Column(name = "AVATAR_PATH")
 	private String avatarPath;
 
-	@Column(name = "BALANCE")
 	private String balance;
 
 

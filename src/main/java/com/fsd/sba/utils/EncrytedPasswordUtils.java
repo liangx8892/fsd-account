@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 public class EncrytedPasswordUtils {
 
 	public static String encrytePassword(String password) {
-		PasswordEncoder encoder = new Pbkdf2PasswordEncoder();
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		return encoder.encode(password);
 	}
 

@@ -3,11 +3,13 @@ package com.fsd.sba.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Lang;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.fsd.sba.entity.User;
+import com.fsd.sba.service.utils.SimpleSelectInExtendedLanguageDriver;
 
 @Mapper
 public interface UserMapper {
@@ -18,6 +20,7 @@ public interface UserMapper {
     		+ "VALUES(#{email}, #{firstName}, #{lastName}, #{mobile}, #{password}, #{role}, #{active}, #{avatarPath}, #{balance})")
     void save(User user);
     
-    @Select("SELECT * FROM USER WHERE ID IN (#{userIds}::int[])")
+    @Lang(SimpleSelectInExtendedLanguageDriver.class)
+    @Select("SELECT * FROM USER WHERE ID IN (#{userIds})")
     List<User> getUsersByIds(@Param("userIds") List<Long> userIds);
 }

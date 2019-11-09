@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: @activeSpringProfile@
 ---
 spring:
   profiles: local
@@ -8,7 +8,7 @@ spring:
     name: fsd-account
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.17.0.1:33060/fsd_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:33060/fsd_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
     username: fsd_account_admin
     password: zaq12wsx
 mybatis:
@@ -22,10 +22,10 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://172.17.0.1:8081/eureka
+      defaultZone: http://localhost:8081/eureka
   instance:
     prefer-ip-address: true
-    ipAddress: 172.17.0.1
+    ipAddress: 127.0.0.1
     instance-id: ${spring.application.name}:${server.port}
     
 # 服务管理配置
@@ -52,21 +52,24 @@ spring:
     name: fsd-account
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:33060/fsd_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://172.17.0.1:33060/fsd_account?useSSL=true&useUnicode=true&characterEncoding=utf-8
     username: fsd_account_admin
     password: zaq12wsx
-          
+mybatis:
+  type-aliases-package: com.fsd.sba.entity
+
 server:
   servlet:
     context-path: /account
   port: 9001
-  
+
 eureka:
   client:
     service-url:
-      defaultZone: http://fsd-registry:8081/eureka
+      defaultZone: http://172.17.0.1:8081/eureka
   instance:
     prefer-ip-address: true
+    ipAddress: 172.17.0.1
     instance-id: ${spring.application.name}:${server.port}
 
 # 服务管理配置
@@ -75,7 +78,7 @@ management:
     web:
       exposure:
         include: "*"        #暴漏的接口，"*"表示所有web监控接口
-#        exclude:            #不暴漏的接口
+      #        exclude:            #不暴漏的接口
       base-path: /actuator  #监控根路径
     enabled-by-default: true
   endpoint:
@@ -83,4 +86,6 @@ management:
       show-details: ALWAYS
 
 swagger.enabled: true
+logging:
+  config: classpath:logback-boot_dev.xml
 

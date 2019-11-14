@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -91,7 +92,7 @@ public class AccountController {
 
 	/**
 	 * Internal interface, consumed by other services
-	 * @param userIds
+	 * @param userIdsString
 	 * @return
 	 */
 	@GetMapping(value = "/getUsersByIds", produces = "application/json")
@@ -102,9 +103,19 @@ public class AccountController {
 			@ApiResponse(code = 404, message = "Not Found"),
 			@ApiResponse(code = 500, message = "Internal Error") })
 	public ResponseEntity<HttpResponse<List<UserModel>>> getUsersByIds(
-			@ApiParam(name = "body", required = true) @RequestBody List<Long> userIds) {
-		logger.debug("Entering getUsersByIds of Account service. param userIds is {}", userIds);
-
+			@RequestParam(value = "userIds", required = false) String userIdsString) {
+		logger.debug("Entering getUsersByIds of Account service. param userIds is {}", userIdsString);
+		List<Long> userIds = new ArrayList<>();
+		if(userIdsString == null || userIdsString.length() == 0){
+			userIds.add(1L);
+		}else{
+			String[] idStrings = userIdsString.split(",");
+			for(String idString: idStrings){
+				if(idString.length() > 0){
+					userIds.add(Long.valueOf(idString));
+				}
+			}
+		}
 		try {
 			List<UserModel> users = userService.getUsersByIds(userIds);
 			HttpResponse<List<UserModel>> response = new HttpResponse(HttpStatus.OK.value(), "OK", users);

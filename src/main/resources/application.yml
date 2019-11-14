@@ -12,6 +12,8 @@ spring:
     username: fsd_account_admin
     password: zaq12wsx
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   type-aliases-package: com.fsd.sba.entity
   
 server:
@@ -56,6 +58,8 @@ spring:
     username: fsd_account_admin
     password: zaq12wsx
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   type-aliases-package: com.fsd.sba.entity
 
 server:

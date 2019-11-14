@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.fsd.sba.entity.User;
-import com.fsd.sba.service.utils.SimpleSelectInExtendedLanguageDriver;
+import com.fsd.sba.utils.SimpleSelectInExtendedLanguageDriver;
 
 @Mapper
 public interface UserMapper {
